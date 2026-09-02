@@ -1,0 +1,8 @@
+:root {
+    --color-brand: #6699CC;
+    --color-brand-secondary: #FFF275
+}
+
+body {
+    min-height: 100vh;
+}

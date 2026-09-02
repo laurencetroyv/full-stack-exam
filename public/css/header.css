@@ -1,0 +1,53 @@
+.site-header {
+    height: 5rem;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 max(4vh, 1.75rem);
+    background: azure;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 1.75rem;
+}
+
+.site-header nav a {
+    color: slategray;
+    text-decoration: none;
+    padding: 1.75rem 0 1.5rem;
+    border-bottom: 0.2rem solid transparent;
+    font: 0.75rem monospace;
+}
+
+.site-header nav a.active {
+    color: var(--color-brand);
+    border-color: var(--color-brand-secondary)
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem   ;
+    color: var(--color-brand);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.brand-logo {
+    background: var(--color-brand-secondary);
+    color: var(--color-brand);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.header-note {
+    color: slategray;
+    font: 1.33rem monospace;
+}

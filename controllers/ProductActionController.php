@@ -21,7 +21,18 @@ if ($action === 'delete' && $id) {
     $categoryId = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT) ?: null;
     $threshold = filter_input(INPUT_POST, 'threshold', FILTER_VALIDATE_INT);
 
-    if ($name === '' || ($action === 'update' && !$id)) { header('Location: /manage?error=product'); exit; }
+    $duplicateParams = ['name' => $name];
+    $duplicateSql = 'SELECT id FROM products WHERE name = :name';
+    if ($action === 'update' && $id) {
+        $duplicateSql .= ' AND id <> :id';
+        $duplicateParams['id'] = $id;
+    }
+    $duplicate = $db->fetch($duplicateSql, $duplicateParams);
+
+    if ($duplicate) {
+        header('Location: /manage?error=duplicate_product');
+        exit;
+    }
 
     $values = ['name' => $name, 'category_id' => $categoryId, 'threshold' => max(0, $threshold ?: 0)];
 
@@ -29,7 +40,7 @@ if ($action === 'delete' && $id) {
         $db->query('INSERT INTO products (name, category_id, threshold) VALUES (:name, :category_id, :threshold)', $values);
     } else {
         $values['id'] = $id;
-        $values['is_active'] = isset($_POST['is_active']);
+        $values['is_active'] = isset($_POST['is_active']) ? 'true' : 'false';
         $db->query('UPDATE products SET name=:name, category_id=:category_id, threshold=:threshold, is_active=:is_active, updated_at=now() WHERE id=:id', $values);
     }
 }

@@ -22,6 +22,10 @@
         <button class="btn btn-primary" popovertarget="product-dialog">Add Product</button>
     </section>
 
+    <?php if (($_GET['error'] ?? '') === 'duplicate_product'): ?>
+        <p class="form-error" role="alert">A material with that name already exists. Choose a different name.</p>
+    <?php endif; ?>
+
     <section class="table-card">
         <div class="table-scroll">
             <table>

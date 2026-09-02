@@ -6,8 +6,8 @@ $routes = [
     '/' => __DIR__ . '/controllers/IndexController.php',
     '/manage'   => __DIR__ . '/controllers/ManageController.php',
     '/about'    => __DIR__ . '/controllers/AboutController.php',
-    '/actions/product'  => __DIR__ . '/controllers/product-actions-controller.php',
-    '/actions/assignment'   => __DIR__ . '/controllers/assignment-controller.php',
+    '/actions/product'  => __DIR__ . '/controllers/ProductActionController.php',
+    '/actions/assignment'   => __DIR__ . '/controllers/AssignmentActionController.php',
 ];
 
 function abort(int $code = 404): void

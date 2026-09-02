@@ -1,1 +1,6 @@
 .idea/
+
+# LiamHQ DB
+dist/
+package.json
+server.js

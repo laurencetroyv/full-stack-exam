@@ -1,0 +1,35 @@
+.about-page {
+    padding-top: 7rem;
+
+    h1 {
+        max-width: 45rem;
+        color: pink;
+    }
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 7rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-brand-secondary);
+
+    p {
+        margin: 0
+    }
+
+    dl {
+        margin: 0;
+
+        div {
+            border-top: 1px solid var(--line);
+            padding: 16px 0;
+        }
+
+        div:first-child {
+            border-top: 0;
+            padding-top: 0
+        }
+    }
+}

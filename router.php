@@ -2,7 +2,9 @@
 
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-$routes = [];
+$routes = [
+    '/about'    => __DIR__ . '/controllers/AboutController.php',
+];
 
 function abort(int $code = 404): void
 {

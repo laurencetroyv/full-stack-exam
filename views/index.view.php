@@ -29,7 +29,18 @@
             <?php endforeach; ?>
         </select>
 
-        <label for="status">Status</label>
+        <label for="product_status">Registry status</label>
+        <select name="product_status" id="product_status">
+            <option value="">Any registry status</option>
+            <option value="active" <?= $filters['product_status'] === 'active' ? 'selected' : '' ?>>
+                Active
+            </option>
+            <option value="inactive" <?= $filters['product_status'] === 'inactive' ? 'selected' : '' ?>>
+                Inactive
+            </option>
+        </select>
+
+        <label for="status">Branch status</label>
         <select name="status" id="status">
             <option value="">Any Status</option>
             <option value="active" <?= $filters['status'] === 'active' ? 'selected' : '' ?>>
@@ -65,6 +76,7 @@
                         <th>Location</th>
                         <th>Stock</th>
                         <th>Price</th>
+                        <th>Registry</th>
                         <th>Status</th>
                         <th>Availability</th>
                     </tr>
@@ -72,15 +84,21 @@
                 <tbody>
                 <?php if (!$assignments): ?>
                 <tr>
-                    <td colspan="7" class="empty">No data found</td>
+                    <td colspan="8" class="empty">No data found</td>
                 </tr>
                 <?php endif; foreach ($assignments as $item): ?>
-                    <tr>
+                    <?php $productIsActive = $item['product_is_active'] === true || $item['product_is_active'] === 't' || $item['product_is_active'] === 1 || $item['product_is_active'] === '1'; ?>
+                    <tr class="<?= $productIsActive ? '' : 'product-inactive' ?>">
                         <td class="material-name"><?= $item['product_name'] ?></td>
                         <td><?= $item['category_name'] ?? 'Not Categorized' ?></td>
                         <td><?= $item['branch_name'] ?></td>
                         <td><?= $item['stock'] ?></td>
                         <td><?= number_format($item['price'], 2) ?></td>
+                        <td>
+                            <span class="pill <?= $productIsActive ? 'active' : 'inactive' ?>">
+                                <?= $productIsActive ? 'Active' : 'Inactive globally' ?>
+                            </span>
+                        </td>
                         <td>
                             <span class="pill <?= $item['branch_status'] ?>">
                                 <?= ucfirst($item['branch_status']) ?>

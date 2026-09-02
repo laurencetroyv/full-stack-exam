@@ -22,6 +22,17 @@
     font-weight: bold
 }
 
+.product-inactive td {
+    color: var(--muted, #6b7280);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+
+.product-inactive .pill,
+.product-inactive .availability {
+    text-decoration: none;
+}
+
 .empty {
     text-align: center;
     color: var(--muted);

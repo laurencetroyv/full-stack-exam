@@ -6,24 +6,24 @@
     justify-content: space-between;
     padding: 0 max(4vh, 1.75rem);
     background: azure;
-}
 
-.site-header nav {
-    display: flex;
-    gap: 1.75rem;
-}
+    nav {
+        display: flex;
+        gap: 1.75rem;
 
-.site-header nav a {
-    color: slategray;
-    text-decoration: none;
-    padding: 1.75rem 0 1.5rem;
-    border-bottom: 0.2rem solid transparent;
-    font: 0.75rem monospace;
-}
+        a {
+            color: slategray;
+            text-decoration: none;
+            padding: 1.75rem 0 1.5rem;
+            border-bottom: 0.2rem solid transparent;
+            font: 0.75rem monospace;
+        }
 
-.site-header nav a.active {
-    color: var(--color-brand);
-    border-color: var(--color-brand-secondary)
+        a.active {
+            color: var(--color-brand);
+            border-color: var(--color-brand-secondary)
+        }
+    }
 }
 
 .brand {

@@ -1,3 +1,9 @@
+.two-col {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 14px
+}
+
 .manage-top {
     max-width: none;
     display: flex;

@@ -72,19 +72,40 @@
 <div id="product-dialog" class="native-dialog" popover="manual">
     <form method="post" action="/actions/product">
         <div class="dialog-head">
-            <div><p class="eyebrow">Material details</p>
-                <h2 data-dialog-title>Add material</h2></div>
-            <button type="button" class="close" popovertarget="product-dialog" popovertargetaction="hide">×</button>
+            <div>
+                <p class="eyebrow">Material details</p>
+                <h2 data-dialog-title>Add material</h2>
+            </div>
+            <button type="button" class="close" popovertarget="product-dialog" popovertargetaction="hide">X</button>
         </div>
-        <input type="hidden" name="action" value="create"><input type="hidden" name="id"><label>Material name<input
-                    required name="name" placeholder="e.g. 12 AWG Copper Wire"></label><label>Category<select
-                    name="category_id">
-                <option value="">Uncategorized</option><?php foreach ($categories as $category): ?>
-                    <option
-                    value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option><?php endforeach ?>
-            </select></label><label>Reorder threshold<input name="threshold" type="number" min="0"
-                                                            value="0"></label><label class="check-row edit-only" hidden><input
-                    name="is_active" type="checkbox" checked> Registry active</label>
+
+        <input type="hidden" name="action" value="create">
+        <input type="hidden" name="id">
+
+        <label>Material name
+            <input required name="name" placeholder="e.g. 12 AWG Copper Wire">
+        </label>
+
+        <label>Category
+            <select name="category_id">
+                <option value="">Uncategorized</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>">
+                    <?= $category['name'] ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </label>
+
+        <label>Reorder threshold
+            <input name="threshold" type="number" min="0" value="0">
+        </label>
+
+        <label class="check-row edit-only" hidden>
+            <input name="is_active" type="checkbox" checked>
+            Registry active
+        </label>
+
         <div class="dialog-actions">
             <button type="button" class="button button-quiet" popovertarget="product-dialog" popovertargetaction="hide">
                 Cancel
@@ -98,29 +119,56 @@
 <div id="assignment-dialog" class="native-dialog" popover="manual">
     <form method="post" action="/actions/assignment">
         <div class="dialog-head">
-            <div><p class="eyebrow">Location settings</p>
-                <h2>Assign a branch</h2></div>
-            <button type="button" class="close" popovertarget="assignment-dialog" popovertargetaction="hide">×</button>
+            <div>
+                <p>Location settings</p>
+                <h2>Assign a branch</h2>
+            </div>
+            <button type="button" class="close" popovertarget="assignment-dialog" popovertargetaction="hide">X</button>
         </div>
-        <input type="hidden" name="action" value="create"><input type="hidden" name="product_id">
-        <p class="assignment-product"></p><label>Location<select name="branch_id" required>
-                <option value="">Choose location</option><?php foreach ($branches as $branch): ?>
-                    <option
-                    value="<?= $branch['id'] ?>"><?= htmlspecialchars($branch['name']) ?></option><?php endforeach ?>
-            </select></label>
-        <div class="two-col"><label>Stock<input name="stock" type="number" min="0" value="0" required></label><label>Price
-                (₱)<input name="price" type="number" min="0" step=".01" value="0" required></label></div>
-        <div class="two-col"><label>Branch status<select name="branch_status">
+
+        <input type="hidden" name="action" value="create">
+        <input type="hidden" name="id"><input type="hidden" name="product_id">
+
+        <p class="assignment-product"></p>
+        <label>Location
+            <select name="branch_id" required>
+                <option value="">Choose location</option>
+                <?php foreach ($branches as $branch): ?>
+                    <optionvalue="<?= $branch['id'] ?>">
+                    <?= $branch['name'] ?>
+                    </option>
+                <?php endforeach ?>
+            </select>
+        </label>
+
+        <div class="two-col">
+            <label>Stock
+                <input name="stock" type="number" min="0" value="0" required>
+            </label>
+
+            <label>Price (PHP)
+                <input name="price" type="number" min="0" step=".01" value="0" required>
+            </label>
+        </div>
+
+        <div class="two-col">
+            <label>Branch status
+                <select name="branch_status">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
-                </select></label><label>Availability<select name="availability">
+                </select>
+            </label>
+
+            <label>Availability
+                <select name="availability">
                     <option value="available">Available</option>
                     <option value="not_available">Not available</option>
-                </select></label></div>
+                </select>
+            </label>
+        </div>
+
         <div class="dialog-actions">
-            <button type="button" class="button button-quiet" popovertarget="assignment-dialog"
-                    popovertargetaction="hide">Cancel
-            </button>
+            <button type="button" class="button button-quiet" popovertarget="assignment-dialog" popovertargetaction="hide">Cancel</button>
             <button class="button button-dark">Save location</button>
         </div>
     </form>
@@ -129,14 +177,15 @@
 <script>
     const productDialog = document.querySelector('#product-dialog');
 
-    function onUpdate()  {
+    function onUpdate(event)  {
+        const button = event.currentTarget;
         const p = JSON.parse(button.dataset.editProduct), form = productDialog.querySelector('form');
-        form.action.value = 'update';
-        form.id.value = p.id;
-        form.name.value = p.name;
-        form.category_id.value = p.category_id || '';
-        form.threshold.value = p.threshold;
-        form.is_active.checked = p.is_active === true || p.is_active === 't' || p.is_active === 1;
+        form.elements.action.value = 'update';
+        form.elements.id.value = p.id;
+        form.elements.name.value = p.name;
+        form.elements.category_id.value = p.category_id || '';
+        form.elements.threshold.value = p.threshold;
+        form.elements.is_active.checked = p.is_active === true || p.is_active === 't' || p.is_active === 1;
         productDialog.querySelector('[data-dialog-title]').textContent = 'Edit material';
         productDialog.querySelector('.edit-only').hidden = false;
     }
@@ -148,8 +197,8 @@
         if (!event.target.dataset.editProduct) {
             const form = productDialog.querySelector('form');
             form.reset();
-            form.action.value = 'create';
-            form.id.value = '';
+            form.elements.action.value = 'create';
+            form.elements.id.value = '';
             productDialog.querySelector('[data-dialog-title]').textContent = 'Add material';
             productDialog.querySelector('.edit-only').hidden = true;
         }
@@ -158,15 +207,45 @@
     document.querySelector('[popovertarget="product-dialog"]')
         .addEventListener('click', onSubmit);
 
-    function assignProduct() {
+    const assignmentsByProduct = <?= json_encode(array_reduce($assignments, static function (array $carry, array $assignment): array {
+        $carry[$assignment['product_id']][$assignment['branch_id']] = $assignment;
+        return $carry;
+    }, []), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+
+    function assignProduct(event) {
+        const button = event.currentTarget;
         const form = document.querySelector('#assignment-dialog form');
         form.reset();
-        form.product_id.value = button.dataset.productId;
+        form.elements.action.value = 'create';
+        form.elements.id.value = '';
+        form.elements.product_id.value = button.dataset.productId;
         document.querySelector('.assignment-product').textContent = button.dataset.productName;
     }
 
     document.querySelectorAll('[data-product-id]')
         .forEach(button => button.addEventListener('click', assignProduct));
+
+    document.querySelector('#assignment-dialog select[name="branch_id"]').addEventListener('change', event => {
+        const form = event.currentTarget.form;
+        const existing = assignmentsByProduct[form.elements.product_id.value]?.[event.currentTarget.value];
+
+        if (!existing) {
+            form.elements.action.value = 'create';
+            form.elements.id.value = '';
+            form.elements.stock.value = 0;
+            form.elements.price.value = 0;
+            form.elements.branch_status.value = 'active';
+            form.elements.availability.value = 'available';
+            return;
+        }
+
+        form.elements.action.value = 'update';
+        form.elements.id.value = existing.id;
+        form.elements.stock.value = existing.stock;
+        form.elements.price.value = existing.price;
+        form.elements.branch_status.value = existing.branch_status;
+        form.elements.availability.value = existing.availability;
+    });
 </script>
 </body>
 </html>

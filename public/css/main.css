@@ -95,3 +95,13 @@ button {
     background: azure;
     color: var(--color-brand-secondary)
 }
+
+select, input {
+    font: 13px monospace;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 11px 12px;
+    min-width: 150px
+}

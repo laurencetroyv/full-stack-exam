@@ -77,8 +77,7 @@
                 <?php endif; foreach ($assignments as $item): ?>
                     <tr>
                         <td class="material-name"><?= $item['product_name'] ?></td>
-                        <td><?= $item['category_name'] ?></td>
-                        <td><?= $item['product_name'] ?? 'Not Categorized' ?></td>
+                        <td><?= $item['category_name'] ?? 'Not Categorized' ?></td>
                         <td><?= $item['branch_name'] ?></td>
                         <td><?= $item['stock'] ?></td>
                         <td><?= number_format($item['price'], 2) ?></td>

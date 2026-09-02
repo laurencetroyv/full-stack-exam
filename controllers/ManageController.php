@@ -14,6 +14,6 @@ $query = "SELECT p.id, p.name, p.is_active, p.threshold, c.name AS category_name
 
 $products = $db->fetchAll($query);
 $categories = $db->fetchAll("SELECT id, name FROM categories ORDER BY name");
-$branches = $db->fetchAll("SELECT pb.*, b.name AS branch_name FROM product_branch pb JOIN branches b ON b.id = pb.branch_id ORDER BY pb.product_id, b.name");
+$branches = $db->fetchAll("SELECT id, name FROM branches ORDER BY name");
 
 require __DIR__ . '/../views/manage.view.php';

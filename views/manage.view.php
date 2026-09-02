@@ -213,9 +213,9 @@
     const assignmentsByProduct = <?= json_encode(array_reduce($assignments, static function (array $carry, array $assignment): array {
         $carry[$assignment['product_id']][$assignment['branch_id']] = $assignment;
         return $carry;
-    }, []), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+    }, []), JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
 
-    const branchNamesById = <?= json_encode(array_column($branches, 'name', 'id'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+    const branchNamesById = <?= json_encode(array_column($branches, 'name', 'id'), JSON_THROW_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
 
     function showAssignedBranches(productId) {
         const list = document.querySelector('.assigned-branches-list');

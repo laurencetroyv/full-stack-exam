@@ -5,4 +5,13 @@
 
 body {
     min-height: 100vh;
+    margin: 0;
+    background: ghostwhite;
+    font: 1.145rem "Times New Roman", serif;
+}
+
+.container {
+    max-width: 80rem;
+    margin: auto;
+    padding: 5rem 2rem;
 }

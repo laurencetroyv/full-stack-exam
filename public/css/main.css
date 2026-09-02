@@ -15,3 +15,83 @@ body {
     margin: auto;
     padding: 5rem 2rem;
 }
+
+.table-card {
+    border: 1px solid whitesmoke;
+    background: #fff
+}
+
+.table-scroll {
+    overflow: auto
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 780px
+}
+
+th {
+    text-align: left;
+    background: azure;
+    font: 10px monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase
+}
+
+th, td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e8eae4
+}
+
+tbody tr:last-child td {
+    border-bottom: 0
+}
+
+.pill, .availability {
+    font: 10px monospace;
+    padding: 5px 8px;
+    border-radius: 20px;
+    display: inline-block
+}
+
+.pill.active, .availability.available {
+    color: #185741;
+    background: #dff5e8
+}
+
+.pill.inactive, .availability.not_available {
+    color: #8a4435;
+    background: #f9e6df
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+
+    form {
+        display: inline
+    }
+}
+
+button {
+    font: inherit;
+    cursor: pointer
+}
+
+.btn {
+    border: 0;
+    border-radius: 3px;
+    padding: 12px 17px;
+    white-space: nowrap
+}
+
+.btn-primary {
+    background: var(--color-brand);
+    color: #fff
+}
+
+.btn-soft {
+    background: azure;
+    color: var(--color-brand-secondary)
+}

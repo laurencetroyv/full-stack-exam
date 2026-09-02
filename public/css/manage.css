@@ -1,0 +1,44 @@
+.manage-top {
+    max-width: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding-bottom: 1rem;
+}
+
+.dialog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-bottom: 1px solid slategrey;
+    padding-bottom: 16px
+}
+
+.native-dialog {
+    width: min(520px, calc(100vw - 32px));
+    border: 1px solid slategray;
+    box-shadow: 8px 8px 0 azure;
+    padding: 26px;
+    background: ghostwhite;
+    border-radius: 0.25rem;
+
+    form {
+        display: grid;
+        gap: 17px
+    }
+
+    input, select {
+        width: 100%
+    }
+
+    &:backdrop {
+        background: #102c2045
+    }
+}
+
+.close {
+    border: 0;
+    background: none;
+    font-size: 29px;
+    line-height: 20px
+}

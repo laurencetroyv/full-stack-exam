@@ -57,3 +57,36 @@
     font-size: 29px;
     line-height: 20px
 }
+
+.assigned-branches {
+    padding: .8rem 1rem;
+    border: 1px solid #cbd5df;
+    border-left: 3px solid #315d4f;
+    background: #f4f8f6;
+}
+
+.assigned-branches-label {
+    margin: 0 0 .45rem;
+    color: #315d4f;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.assigned-branches-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin: 0;
+    color: #43515c;
+}
+
+.assigned-branch {
+    padding: .25rem .55rem;
+    border-radius: 999px;
+    background: #dcebe4;
+    color: #183d30;
+    font-size: .875rem;
+    font-weight: 600;
+}

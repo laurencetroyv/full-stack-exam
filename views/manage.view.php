@@ -121,7 +121,7 @@
         <div class="dialog-head">
             <div>
                 <p>Location settings</p>
-                <h2>Assign a branch</h2>
+                <h2>Assign a branch to <span class="assignment-product"></span></h2>
             </div>
             <button type="button" class="close" popovertarget="assignment-dialog" popovertargetaction="hide">X</button>
         </div>
@@ -129,12 +129,15 @@
         <input type="hidden" name="action" value="create">
         <input type="hidden" name="id"><input type="hidden" name="product_id">
 
-        <p class="assignment-product"></p>
+        <section class="assigned-branches" aria-live="polite">
+            <p class="assigned-branches-label">Already assigned</p>
+            <p class="assigned-branches-list">No locations assigned yet.</p>
+        </section>
         <label>Location
             <select name="branch_id" required>
                 <option value="">Choose location</option>
                 <?php foreach ($branches as $branch): ?>
-                    <optionvalue="<?= $branch['id'] ?>">
+                    <option value="<?= $branch['id'] ?>">
                     <?= $branch['name'] ?>
                     </option>
                 <?php endforeach ?>
@@ -212,6 +215,27 @@
         return $carry;
     }, []), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
 
+    const branchNamesById = <?= json_encode(array_column($branches, 'name', 'id'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+
+    function showAssignedBranches(productId) {
+        const list = document.querySelector('.assigned-branches-list');
+        const branchIds = Object.keys(assignmentsByProduct[productId] || {});
+
+        list.replaceChildren();
+
+        if (!branchIds.length) {
+            list.textContent = 'No locations assigned yet.';
+            return;
+        }
+
+        branchIds.forEach(branchId => {
+            const branch = document.createElement('span');
+            branch.className = 'assigned-branch';
+            branch.textContent = branchNamesById[branchId] || 'Unknown location';
+            list.append(branch);
+        });
+    }
+
     function assignProduct(event) {
         const button = event.currentTarget;
         const form = document.querySelector('#assignment-dialog form');
@@ -220,6 +244,7 @@
         form.elements.id.value = '';
         form.elements.product_id.value = button.dataset.productId;
         document.querySelector('.assignment-product').textContent = button.dataset.productName;
+        showAssignedBranches(button.dataset.productId);
     }
 
     document.querySelectorAll('[data-product-id]')
